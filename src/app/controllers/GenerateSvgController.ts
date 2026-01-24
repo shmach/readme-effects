@@ -1,14 +1,28 @@
+import type { IController } from '../@types/IController';
+import type { IHttpRequest, IHttpResponse } from '../@types/IHttp';
 import type { GenerateSvgUseCase } from '../useCases/GenerateSvgUseCase';
 
-export class GenerateSvgController {
+type GenerateSvgControllerRequest = {
+  url: string;
+};
+
+export class GenerateSvgController implements IController<GenerateSvgControllerRequest> {
   constructor(private generateSvgUseCase: GenerateSvgUseCase) {}
-  async handler(req: Request): Promise<Record<string, any>> {
-    console.log('GenerateSvgController handler called with request:', req.url);
+
+  async handler(
+    req: IHttpRequest<GenerateSvgControllerRequest>,
+  ): Promise<IHttpResponse> {
+    console.log(
+      'GenerateSvgController handler called with request:',
+      req.query,
+    );
+
     const svg = this.generateSvgUseCase.execute();
+
     return {
-      status: 200,
+      statusCode: 200,
       headers: { 'Content-Type': 'image/svg+xml' },
-      body: svg,
+      body: { svg },
     };
   }
 }
