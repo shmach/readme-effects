@@ -2,6 +2,7 @@ export interface IHttpRequest<TBody extends Record<string, any> | undefined> {
   body?: TBody;
   query?: Record<string, string>;
   params?: Record<string, string>;
+  headers?: Record<string, string>;
 }
 
 export interface IHttpResponse {

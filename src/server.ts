@@ -1,14 +1,15 @@
 import { routeAdapter } from './main/adapters/routeAdapter';
-import { makeGenerateSvgController } from './main/factories/makeGenerateSvgController';
+import { makeGenerateWavyGlitchSvgController } from './main/factories/makeGenerateWavyGlitchSvgController';
 
-const server = Bun.serve({
+Bun.serve({
   routes: {
     '/': () => new Response('Hello, World!'),
-    '/generate': (req) => routeAdapter(makeGenerateSvgController())(req),
+    '/generate/wavy-glitch': (req) =>
+      routeAdapter(makeGenerateWavyGlitchSvgController())(req),
   },
   fetch() {
     return new Response('Not Found', { status: 404 });
   },
 });
 
-console.log(`Server running at http://localhost:${server.port}`);
+console.log('Server is running on http://localhost:3000');
