@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./style.css">
+  <title>Readme+Effects</title>
+</head>
+
+<body>
+  <header class="header">
+    <h1 class="title"></h1>
+    <span class="cursor"></span>
+  </header>
+
+  <main></main>
+
+  <footer></footer>
+
+  <script>
+    const title = "Readme+Effects";
+    const titleContainer = document.querySelector(".title");
+
+    const titleAnimation = () => {
+      let index = 0;
+      const interval = setInterval(() => {
+        titleContainer.innerText += title[index];
+        index++;
+        if (index === title.length) {
+          clearInterval(interval);
+        }
+      }, 150);
+
+
+    }
+
+    window.addEventListener("load", () => {
+      titleAnimation();
+    });
+  </script>
+</body>
+
+</html>

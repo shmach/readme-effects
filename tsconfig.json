@@ -34,7 +34,7 @@
         "server/app/*"
       ],
       "@ui/*": [
-        "client/*"
+        "public/*"
       ]
     }
   },

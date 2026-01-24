@@ -1,9 +1,10 @@
 import { routeAdapter } from '@main/adapters/routeAdapter';
 import { makeGenerateWavyGlitchSvgController } from '@main/factories/makeGenerateWavyGlitchSvgController';
+import homepage from '@ui/index.html';
 
 Bun.serve({
   routes: {
-    '/': () => new Response('Hello, World!'),
+    '/': homepage,
     '/generate/wavy-glitch': (req) =>
       routeAdapter(makeGenerateWavyGlitchSvgController())(req),
   },
