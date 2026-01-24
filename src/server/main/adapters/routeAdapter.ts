@@ -1,4 +1,4 @@
-import type { IController } from '../../app/@types/IController';
+import type { IController } from '@app/@types/IController';
 
 export function routeAdapter(controller: IController<any>) {
   return async (req: Request): Promise<Response> => {

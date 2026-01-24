@@ -1,5 +1,5 @@
-import { GenerateWavyGlitchSvgController } from '../../app/controllers/GenerateWavyGlitchSvg';
-import { GenerateWavyGlitchSvgUseCase } from '../../app/useCases/GenerateWavyGlitchSvgUseCase';
+import { GenerateWavyGlitchSvgController } from '@app/controllers/GenerateWavyGlitchSvg';
+import { GenerateWavyGlitchSvgUseCase } from '@app/useCases/GenerateWavyGlitchSvgUseCase';
 
 export function makeGenerateWavyGlitchSvgController() {
   const generateWavyGlitchSvgUseCase = new GenerateWavyGlitchSvgUseCase();
