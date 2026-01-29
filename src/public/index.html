@@ -10,17 +10,99 @@
 
 <body>
   <header class="header">
-    <h1 class="title"></h1>
-    <span class="cursor"></span>
+    <div>
+      <h1 class="title"></h1>
+      <span class="cursor"></span>
+    </div>
+    <span class="author">Developed by <a href="https://github.com/shmach">@shmach</a></span>
   </header>
 
-  <main></main>
+  <main>
+    <section class="form-section">
+      <div class="section-title-container">
+        <h2 class="section-title">Properties</h2>
+      </div>
+      <form>
+        <div class="form-component form-component__text">
+          <div class="form-input-container">
+            <label for="text-input">Text:</label>
+            <input id="text-input" name="text-input" type="text" placeholder="Enter your text here"
+              value="This is Readme+Effects text effect!">
+            <button type="button" class="btn" id="add-new-line">+</button>
+          </div>
+        </div>
+        <div class="form-component form-component__select">
+          <div class="form-input-container">
+            <label for="effect-select">Select Effect:</label>
+            <select id="effect-select" name="effect-select">
+              <option value="wavy-glitch">Wavy Glitch</option>
+              <option value="typing">Typing</option>
+              <option value="matrix-bug">Matrix Bug</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-component form-component__text-properties">
+          <div class="form-input-container">
+            <label for="primary-color">Primary color:</label>
+            <input type="color" id="primary-color" name="primary-color" value="#00ff00">
+          </div>
+          <div class="form-input-container">
+            <label for="secondary-color">Secondary color:</label>
+            <input type="color" id="secondary-color" name="secondary-color" value="#ff00ff">
+          </div>
+          <div class="form-input-container">
+            <label for="bg-color">Background color:</label>
+            <input type="color" id="bg-color" name="bg-color" value="#010101">
+          </div>
+          <div class="form-input-container">
+            <label for="font">Font: </label>
+            <input type="text" id="font" name="font" value="Roboto">
+          </div>
+          <div class="form-input-container">
+            <label for="size">Font Size: </label>
+            <input type="number" id="size" name="size" placeholder="(px)">
+          </div>
+          <div class="form-input-container">
+            <div class="size-inputs">
+              <label for="width">Width: </label>
+              <input type="number" id="width" name="width" placeholder="(px)">
+            </div>
+            <div class="size-inputs">
+              <label for="height">Height: </label>
+              <input type="number" id="height" name="height" placeholder="(px)">
+            </div>
+          </div>
+        </div>
+      </form>
+    </section>
+    <section class="output-section">
+      <div class="output-container">
+        <div class="section-title-container">
+          <h2 class="section-title">Output</h2>
+        </div>
+        <div>
+          <select id="effect-select" name="effect-select">
+            <option value="wavy-glitch">Markdown</option>
+            <option value="typing">HTML</option>
+          </select>
+          <button class="btn">Copy</button>
+        </div>
+      </div>
+      <div class="output-container img-container">
+        <img alt="Output Preview" id="svg-output" />
+      </div>
+      <div class="output-container">
+        <code id="code-output"></code>
+      </div>
+    </section>
+  </main>
 
   <footer></footer>
 
   <script>
     const title = "Readme+Effects";
     const titleContainer = document.querySelector(".title");
+    const code = document.querySelector("#code-output");
 
     const titleAnimation = () => {
       let index = 0;
@@ -31,12 +113,12 @@
           clearInterval(interval);
         }
       }, 150);
-
-
     }
 
     window.addEventListener("load", () => {
       titleAnimation();
+      const img = document.getElementById("svg-output");
+      img.src = "/generate/wavy-glitch?text=Teste";
     });
   </script>
 </body>

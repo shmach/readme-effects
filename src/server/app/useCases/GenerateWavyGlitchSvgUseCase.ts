@@ -14,7 +14,7 @@ export class GenerateWavyGlitchSvgUseCase implements IUseCase<
     const text = url.searchParams.get('text') ?? 'Hello World!';
     const color = url.searchParams.get('color')?.replace('#', '') ?? '2cb67d';
     const size = Number(url.searchParams.get('size') ?? '36');
-    const width = Number(url.searchParams.get('width') ?? '800');
+    const width = Number(url.searchParams.get('width') ?? '130');
     const height = Number(url.searchParams.get('height') ?? '80');
 
     const safeText = escapeXML(decodeURIComponent(text));
@@ -56,12 +56,12 @@ export class GenerateWavyGlitchSvgUseCase implements IUseCase<
 
   <rect width="100%" height="100%" fill="transparent"/>
 
-  <text x="50%" y="50%"
+    <text x="50%" y="50%"
     dominant-baseline="middle"
     text-anchor="middle"
     font-family="Fira Code, monospace"
     font-size="${size}"
-    fill="${color}"
+    fill="#${color}"
     filter="url(#glitch)">
     ${safeText}
   </text>

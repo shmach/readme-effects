@@ -3,8 +3,12 @@ import type { IController } from '@app/@types/IController';
 export function routeAdapter(controller: IController<any>) {
   return async (req: Request): Promise<Response> => {
     try {
+      const host = req.headers.get('host') ?? 'localhost';
+      const fullUrl =
+        req.url &&
+        (req.url.startsWith('http') ? req.url : `http://${host}${req.url}`);
       const result = await controller.handler({
-        query: req.url ? { url: req.url } : {},
+        query: fullUrl ? { url: fullUrl } : {},
         body: await req.json().catch(() => ({})),
         headers: Object.fromEntries(req.headers),
       });
