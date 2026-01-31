@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./style.css">
+  <script defer src="./main.js"></script>
   <title>Readme+Effects</title>
 </head>
 
@@ -51,25 +52,29 @@
             <input type="color" id="secondary-color" name="secondary-color" value="#ff00ff">
           </div>
           <div class="form-input-container">
+            <label for="">Transparent background:</label>
+            <input type="checkbox" id="transparent-bg" name="transparent-bg" checked>
+          </div>
+          <div class="form-input-container disabled">
             <label for="bg-color">Background color:</label>
-            <input type="color" id="bg-color" name="bg-color" value="#010101">
+            <input type="color" id="bg-color" name="bg-color" disabled value="#010101">
           </div>
           <div class="form-input-container">
             <label for="font">Font: </label>
             <input type="text" id="font" name="font" value="Roboto">
           </div>
           <div class="form-input-container">
-            <label for="size">Font Size: </label>
-            <input type="number" id="size" name="size" placeholder="(px)">
+            <label for="size">Font Size (px): </label>
+            <input type="number" id="size" name="size" value="28" placeholder="Type the size in pixels...">
           </div>
           <div class="form-input-container">
             <div class="size-inputs">
-              <label for="width">Width: </label>
-              <input type="number" id="width" name="width" placeholder="(px)">
+              <label for="width">Width (px): </label>
+              <input type="number" id="width" name="width" value="500" placeholder="(px)">
             </div>
             <div class="size-inputs">
-              <label for="height">Height: </label>
-              <input type="number" id="height" name="height" placeholder="(px)">
+              <label for="height">Height (px): </label>
+              <input type="number" id="height" name="height" value="80" placeholder="(px)">
             </div>
           </div>
         </div>
@@ -81,9 +86,9 @@
           <h2 class="section-title">Output</h2>
         </div>
         <div>
-          <select id="effect-select" name="effect-select">
-            <option value="wavy-glitch">Markdown</option>
-            <option value="typing">HTML</option>
+          <select id="output-type-select" name="output-type-select" defaultValue="markdown">
+            <option value="markdown">Markdown</option>
+            <option value="html">HTML</option>
           </select>
           <button class="btn">Copy</button>
         </div>
@@ -98,29 +103,6 @@
   </main>
 
   <footer></footer>
-
-  <script>
-    const title = "Readme+Effects";
-    const titleContainer = document.querySelector(".title");
-    const code = document.querySelector("#code-output");
-
-    const titleAnimation = () => {
-      let index = 0;
-      const interval = setInterval(() => {
-        titleContainer.innerText += title[index];
-        index++;
-        if (index === title.length) {
-          clearInterval(interval);
-        }
-      }, 150);
-    }
-
-    window.addEventListener("load", () => {
-      titleAnimation();
-      const img = document.getElementById("svg-output");
-      img.src = "/generate/wavy-glitch?text=Teste";
-    });
-  </script>
 </body>
 
 </html>

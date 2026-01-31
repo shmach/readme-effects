@@ -12,12 +12,15 @@ export class GenerateWavyGlitchSvgUseCase implements IUseCase<
     const url = new URL(params.url);
 
     const text = url.searchParams.get('text') ?? 'Hello World!';
-    const color = url.searchParams.get('color')?.replace('#', '') ?? '2cb67d';
-    const size = Number(url.searchParams.get('size') ?? '36');
-    const width = Number(url.searchParams.get('width') ?? '130');
+    const pColor = url.searchParams.get('pColor')?.replace('#', '') ?? '00ff00';
+    const sColor = url.searchParams.get('sColor')?.replace('#', '') ?? 'ff00ff';
+    const bgColor = url.searchParams.get('bgColor') ?? 'transparent';
+    const font = url.searchParams.get('font') ?? 'Fira Code, monospace';
+    const size = Number(url.searchParams.get('size') ?? '18');
+    const width = Number(url.searchParams.get('width') ?? '400');
     const height = Number(url.searchParams.get('height') ?? '80');
 
-    const safeText = escapeXML(decodeURIComponent(text));
+    const safeText = escapeXML(text);
 
     const svg = `
   <svg xmlns="http://www.w3.org/2000/svg"
@@ -54,14 +57,14 @@ export class GenerateWavyGlitchSvgUseCase implements IUseCase<
     </filter>
   </defs>
 
-  <rect width="100%" height="100%" fill="transparent"/>
+  <rect width="100%" height="100%" fill="${bgColor}"/>
 
     <text x="50%" y="50%"
     dominant-baseline="middle"
     text-anchor="middle"
-    font-family="Fira Code, monospace"
+    font-family="${font}"
     font-size="${size}"
-    fill="#${color}"
+    fill="#${pColor}"
     filter="url(#glitch)">
     ${safeText}
   </text>
@@ -69,9 +72,9 @@ export class GenerateWavyGlitchSvgUseCase implements IUseCase<
   <text x="50%" y="50%"
     dominant-baseline="middle"
     text-anchor="middle"
-    font-family="Fira Code, monospace"
+    font-family="${font}"
     font-size="${size}"
-    fill="#ff2e63"
+    fill="#${sColor}"
     opacity="0.6"
     filter="url(#rgb)">
     ${safeText}
