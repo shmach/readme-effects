@@ -1,5 +1,5 @@
+import { extractDataFromUrl } from '@app/helpers/extractDataFromUrl';
 import type { IUseCase } from '../@types/IUseCase';
-import { escapeXML } from '../helpers/escapeXML';
 
 type GenerateWavyGlitchSvgUseCaseParams = {
   url: string;
@@ -9,18 +9,86 @@ export class GenerateWavyGlitchSvgUseCase implements IUseCase<
   string
 > {
   async execute(params: GenerateWavyGlitchSvgUseCaseParams): Promise<string> {
-    const url = new URL(params.url);
+    const { text, size, font, pColor, sColor, bgColor, width, height } =
+      extractDataFromUrl(params.url);
 
-    const text = url.searchParams.get('text') ?? 'Hello World!';
-    const pColor = url.searchParams.get('pColor')?.replace('#', '') ?? '00ff00';
-    const sColor = url.searchParams.get('sColor')?.replace('#', '') ?? 'ff00ff';
-    const bgColor = url.searchParams.get('bgColor') ?? 'transparent';
-    const font = url.searchParams.get('font') ?? 'Fira Code, monospace';
-    const size = Number(url.searchParams.get('size') ?? '18');
-    const width = Number(url.searchParams.get('width') ?? '400');
-    const height = Number(url.searchParams.get('height') ?? '80');
+    const lineDuration = 4;
+    const fadeDuration = 0.5;
+    const totalDuration = Math.max(text.length * lineDuration, lineDuration);
 
-    const safeText = escapeXML(text);
+    const buildGlitchAnimation = (index: number, maxOpacity: number) => {
+      if (text.length === 1) {
+        return null;
+      }
+
+      const start = index * lineDuration;
+      const end = start + lineDuration;
+      const fade = Math.min(fadeDuration, lineDuration / 2);
+
+      const keyTimes = [
+        0,
+        start / totalDuration,
+        (start + fade * 0.2) / totalDuration,
+        (start + fade * 0.4) / totalDuration,
+        (start + fade) / totalDuration,
+        (end - fade) / totalDuration,
+        (end - fade * 0.6) / totalDuration,
+        (end - fade * 0.3) / totalDuration,
+        end / totalDuration,
+        1,
+      ];
+
+      const opacityValues = `0;0;${maxOpacity};0;${maxOpacity};${maxOpacity};0;${maxOpacity};0;0`;
+      const jitterValues = '0 0;0 0;-1 0;2 0;-1 0;0 0;2 -1;-2 1;0 0;0 0';
+
+      return {
+        opacityValues,
+        jitterValues,
+        keyTimes: keyTimes.join(';'),
+      };
+    };
+
+    const textElements = text
+      .map((line, index) => {
+        const primary = buildGlitchAnimation(index, 1);
+        const secondary = buildGlitchAnimation(index, 0.6);
+
+        const primaryAnimate = primary
+          ? `\n      <animate attributeName="opacity" dur="${totalDuration}s" values="${primary.opacityValues}" keyTimes="${primary.keyTimes}" repeatCount="indefinite"/>\n      <animateTransform attributeName="transform" type="translate" dur="${totalDuration}s" values="${primary.jitterValues}" keyTimes="${primary.keyTimes}" repeatCount="indefinite"/>`
+          : '';
+        const secondaryAnimate = secondary
+          ? `\n      <animate attributeName="opacity" dur="${totalDuration}s" values="${secondary.opacityValues}" keyTimes="${secondary.keyTimes}" repeatCount="indefinite"/>\n      <animateTransform attributeName="transform" type="translate" dur="${totalDuration}s" values="${secondary.jitterValues}" keyTimes="${secondary.keyTimes}" repeatCount="indefinite"/>`
+          : '';
+
+        const primaryOpacity = primary ? '0' : '1';
+        const secondaryOpacity = secondary ? '0' : '0.6';
+
+        return `
+    <text x="50%" y="50%"
+      dominant-baseline="middle"
+      text-anchor="middle"
+      font-family="${font}"
+      font-size="${size}"
+      fill="#${pColor}"
+      filter="url(#glitch)"
+      opacity="${primaryOpacity}">
+      ${line}
+      ${primaryAnimate}
+    </text>
+
+    <text x="50%" y="50%"
+      dominant-baseline="middle"
+      text-anchor="middle"
+      font-family="${font}"
+      font-size="${size}"
+      fill="#${sColor}"
+      opacity="${secondaryOpacity}"
+      filter="url(#rgb)">
+      ${line}
+      ${secondaryAnimate}
+    </text>`;
+      })
+      .join('\n');
 
     const svg = `
   <svg xmlns="http://www.w3.org/2000/svg"
@@ -59,26 +127,7 @@ export class GenerateWavyGlitchSvgUseCase implements IUseCase<
 
   <rect width="100%" height="100%" fill="${bgColor}"/>
 
-    <text x="50%" y="50%"
-    dominant-baseline="middle"
-    text-anchor="middle"
-    font-family="${font}"
-    font-size="${size}"
-    fill="#${pColor}"
-    filter="url(#glitch)">
-    ${safeText}
-  </text>
-
-  <text x="50%" y="50%"
-    dominant-baseline="middle"
-    text-anchor="middle"
-    font-family="${font}"
-    font-size="${size}"
-    fill="#${sColor}"
-    opacity="0.6"
-    filter="url(#rgb)">
-    ${safeText}
-  </text>
+  ${textElements}
 </svg>
 `;
 

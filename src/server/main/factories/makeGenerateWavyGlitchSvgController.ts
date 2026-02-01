@@ -1,4 +1,4 @@
-import { GenerateWavyGlitchSvgController } from '@app/controllers/GenerateWavyGlitchSvg';
+import { GenerateWavyGlitchSvgController } from '@app/controllers/GenerateWavyGlitchSvgController';
 import { GenerateWavyGlitchSvgUseCase } from '@app/useCases/GenerateWavyGlitchSvgUseCase';
 
 export function makeGenerateWavyGlitchSvgController() {
