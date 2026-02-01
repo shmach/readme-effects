@@ -15,6 +15,7 @@
   --background-color: #16161a;
   --muted: #94a1b2;
   --muted-dark: #72757e3e;
+  --destructive: #a70909;
 }
 
 * {
@@ -255,6 +256,29 @@ select>option {
   color: var(--background-color);
 }
 
+.btn:disabled,
+.btn[disabled] {
+  border-color: var(--muted);
+  color: var(--muted);
+  cursor: not-allowed;
+}
+
+.btn:disabled:hover,
+.btn[disabled]:hover {
+  background-color: var(--background-color);
+  color: var(--muted);
+}
+
+.destructive {
+  border-color: var(--destructive);
+  color: var(--destructive);
+}
+
+.destructive:hover {
+  background-color: var(--destructive);
+  color: var(--background-color);
+}
+
 .output-section {
   width: 50%;
   display: flex;
@@ -267,10 +291,21 @@ select>option {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 16px;
 }
 
 .output-container button {
-  width: 100px;
+  width: 100%;
+}
+
+#copy-output-btn {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+#copy-output-btn:hover {
+  background-color: var(--primary-color);
+  color: var(--background-color);
 }
 
 .svg-output {

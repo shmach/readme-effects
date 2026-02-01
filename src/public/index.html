@@ -24,14 +24,14 @@
         <h2 class="section-title">Properties</h2>
       </div>
       <form>
-        <div class="form-component form-component__text">
+        <div class="form-component form-component__text" id="text-inputs-container">
           <div class="form-input-container">
-            <label for="text-input">Text:</label>
-            <input id="text-input" name="text-input" type="text" placeholder="Enter your text here"
-              value="This is Readme+Effects text effect!">
-            <button type="button" class="btn" id="add-new-line">+</button>
+            <label for="text-input-1">Text:</label>
+            <input id="text-input-1" name="text-input" type="text" data-text-input="1"
+              placeholder="Enter your text here" value="This is Readme+Effects text effect!">
           </div>
         </div>
+        <button type="button" class="btn" id="add-new-line">+ Add new line</button>
         <div class="form-component form-component__select">
           <div class="form-input-container">
             <label for="effect-select">Select Effect:</label>
@@ -57,7 +57,7 @@
           </div>
           <div class="form-input-container disabled">
             <label for="bg-color">Background color:</label>
-            <input type="color" id="bg-color" name="bg-color" disabled value="#010101">
+            <input type="color" id="bg-color" name="bg-color" disabled>
           </div>
           <div class="form-input-container">
             <label for="font">Font: </label>
@@ -90,7 +90,6 @@
             <option value="markdown">Markdown</option>
             <option value="html">HTML</option>
           </select>
-          <button class="btn">Copy</button>
         </div>
       </div>
       <div class="output-container img-container">
@@ -98,6 +97,10 @@
       </div>
       <div class="output-container">
         <code id="code-output"></code>
+      </div>
+      <div class="output-container btn-container">
+        <button class="btn" id="copy-output-btn">Copy Code</button>
+        <button class="btn" id="copy-url-btn">Copy URL only</button>
       </div>
     </section>
   </main>
