@@ -1,5 +1,5 @@
 import { extractDataFromUrl } from '@app/helpers/extractDataFromUrl';
-import type { IUseCase } from '../@types/IUseCase';
+import type { IUseCase } from '../../@types/IUseCase';
 
 type GenerateWavyGlitchSvgUseCaseParams = {
   url: string;

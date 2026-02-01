@@ -1,6 +1,6 @@
-import type { IController } from '../@types/IController';
-import type { IHttpRequest, IHttpResponse } from '../@types/IHttp';
-import type { GenerateWavyGlitchSvgUseCase } from '../useCases/GenerateWavyGlitchSvgUseCase';
+import type { IController } from '../../@types/IController';
+import type { IHttpRequest, IHttpResponse } from '../../@types/IHttp';
+import type { GenerateWavyGlitchSvgUseCase } from '../../useCases/web/GenerateWavyGlitchSvgUseCase';
 
 export class GenerateWavyGlitchSvgController implements IController<undefined> {
   constructor(

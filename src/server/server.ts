@@ -1,5 +1,5 @@
 import { routeAdapter } from '@main/adapters/routeAdapter';
-import { makeGenerateWavyGlitchSvgController } from '@main/factories/makeGenerateWavyGlitchSvgController';
+import { makeGenerateWavyGlitchSvgController } from '@main/factories/web/makeGenerateWavyGlitchSvgController';
 import homepage from '@ui/index.html';
 
 Bun.serve({
