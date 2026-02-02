@@ -1,7 +1,7 @@
 /* eslint no-undef: "off" */
 
 // Title Animation vars
-const title = 'Readme+Effects';
+const title = 'Text+Effects';
 const titleContainer = document.querySelector('.title');
 
 // Output Code vars (This is not IA coded >:( ))

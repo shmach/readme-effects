@@ -3,6 +3,7 @@ import { makeGenerateWavyGlitchSvgController } from '@main/factories/web/makeGen
 import homepage from '@ui/index.html';
 
 Bun.serve({
+  port: process.env.PORT ? Number(process.env.PORT) : 3000,
   routes: {
     '/': homepage,
     '/generate/wavy-glitch': (req) =>
