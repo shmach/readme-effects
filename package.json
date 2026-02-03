@@ -20,6 +20,8 @@
   },
   "scripts": {
     "dev": "bun --watch index.ts",
+    "build": "bun build --target=bun --outdir=dist --outfile=index.js --minify index.ts && cp -r src/public dist/public",
+    "start": "bun dist/index.js",
     "prepare": "husky"
   },
   "lint-staged": {

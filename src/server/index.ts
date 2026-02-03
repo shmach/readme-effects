@@ -1,11 +1,29 @@
 import { routeAdapter } from '@main/adapters/routeAdapter';
 import { makeGenerateWavyGlitchSvgController } from '@main/factories/web/makeGenerateWavyGlitchSvgController';
-import homepage from '@ui/index.html';
+
+/**
+ * Static files
+ * Serving index.html, main.js, and style.css
+ */
+const homepage = Bun.file('src/public/index.html');
+const mainJs = Bun.file('src/public/main.js');
+const styleCss = Bun.file('src/public/style.css');
+
+const staticFiles = {
+  '/': () =>
+    new Response(homepage, { headers: { 'Content-Type': 'text/html' } }),
+  '/main.js': () =>
+    new Response(mainJs, {
+      headers: { 'Content-Type': 'application/javascript' },
+    }),
+  '/style.css': () =>
+    new Response(styleCss, { headers: { 'Content-Type': 'text/css' } }),
+};
 
 Bun.serve({
   port: process.env.PORT ? Number(process.env.PORT) : 3000,
   routes: {
-    '/': homepage,
+    ...staticFiles,
     '/generate/wavy-glitch': (req) =>
       routeAdapter(makeGenerateWavyGlitchSvgController())(req),
     // '/generate/typing': (req) =>
