@@ -2,11 +2,15 @@ FROM oven/bun:latest
 
 WORKDIR /app
 
-COPY package.json package-lock.json* bun.lockb* ./
-RUN bun install --production || true
+# Copy package files and install dependencies
+COPY package.json bun.lockb* ./
+RUN bun install --frozen-lockfile
 
+# Copy source files
 COPY . .
 
+# Build the application
+RUN bun run build
 EXPOSE 3000
 
-CMD ["bun", "src/server/index.ts"]
+CMD ["bun", "dist/index.js"]
