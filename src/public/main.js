@@ -1,14 +1,83 @@
 /* eslint no-undef: "off" */
 
-// Title Animation vars
+// Title Animation
 const title = 'Readme+Effects';
 const titleContainer = document.querySelector('.title');
+
+const titleAnimation = () => {
+  let index = 0;
+  const interval = setInterval(() => {
+    titleContainer.innerText += title[index];
+    index++;
+    if (index === title.length) {
+      clearInterval(interval);
+    }
+  }, 150);
+};
+
+// Inputs
+let textInputs = document.querySelectorAll('[data-text-input]');
+const effectSelect = document.querySelector('#effect-select');
+const primaryColorInput = document.querySelector('#primary-color');
+const secondaryColorInput = document.querySelector('#secondary-color');
+const transparentBgCheckbox = document.querySelector('#transparent-bg');
+const bgColorInput = document.querySelector('#bg-color');
+const fontInput = document.querySelector('#font');
+const sizeInput = document.querySelector('#size');
+const widthInput = document.querySelector('#width');
+const heightInput = document.querySelector('#height');
+
+const textInputsContainer = document.querySelector('#text-inputs-container');
+
+const addNewLineBtn = document.querySelector('#add-new-line');
+addNewLineBtn.addEventListener('click', () => {
+  showLoadingIndicator();
+  const i = textInputs.length + 1;
+  const parent = document.querySelector('#text-inputs-container');
+  const component = `<div class="form-input-container">
+            <label for="text-input-${i}">Text:</label>
+            <input id="text-input-${i}" name="text-input" type="text" data-text-input="${i}"
+              placeholder="Enter your text here" value="And you just added line ${i}!" >
+            <button type="button" class="btn destructive" data-remove-line="${i}">X</button>
+          </div>`;
+  parent.insertAdjacentHTML('beforeend', component);
+  textInputs = document.querySelectorAll('[data-text-input]');
+  updateOutput();
+});
+
+textInputsContainer.addEventListener('click', (e) => {
+  if (e.target && e.target.matches('button.btn.destructive')) {
+    showLoadingIndicator();
+    const lineToRemove = e.target.getAttribute('data-remove-line');
+    const inputToRemove = document.querySelector(
+      `input[data-text-input="${lineToRemove}"]`,
+    );
+    const containerToRemove = inputToRemove.parentElement;
+    containerToRemove.remove();
+    textInputs = document.querySelectorAll('[data-text-input]');
+    updateOutput();
+  }
+});
+
+const inputs = [
+  ...textInputs,
+  effectSelect,
+  primaryColorInput,
+  secondaryColorInput,
+  bgColorInput,
+  fontInput,
+  sizeInput,
+  widthInput,
+  heightInput,
+];
 
 // Output Code vars (This is not IA coded >:( ))
 const outputTypeSelected = document.querySelector('#output-type-select');
 const code = document.querySelector('#code-output');
 const copyOutputBtn = document.querySelector('#copy-output-btn');
 const copyOutputUrlBtn = document.querySelector('#copy-url-btn');
+const imgOutput = document.querySelector('#svg-output');
+const spinner = document.querySelector('.spinner');
 
 copyOutputBtn.addEventListener('click', () => {
   navigator.clipboard.writeText(code.innerText).then(() => {
@@ -28,69 +97,14 @@ copyOutputUrlBtn.addEventListener('click', () => {
   });
 });
 
-// Input vars
-let textInputs = document.querySelectorAll('[data-text-input]');
-const effectSelect = document.querySelector('#effect-select');
-const primaryColorInput = document.querySelector('#primary-color');
-const secondaryColorInput = document.querySelector('#secondary-color');
-const transparentBgCheckbox = document.querySelector('#transparent-bg');
-const bgColorInput = document.querySelector('#bg-color');
-const fontInput = document.querySelector('#font');
-const sizeInput = document.querySelector('#size');
-const widthInput = document.querySelector('#width');
-const heightInput = document.querySelector('#height');
+const showLoadingIndicator = () => {
+  spinner.classList.remove('hidden');
+  imgOutput.classList.add('hidden');
+};
 
-const textInputsContainer = document.querySelector('#text-inputs-container');
-
-const addNewLineBtn = document.querySelector('#add-new-line');
-addNewLineBtn.addEventListener('click', () => {
-  const i = textInputs.length + 1;
-  const parent = document.querySelector('#text-inputs-container');
-  const component = `<div class="form-input-container">
-            <label for="text-input-${i}">Text:</label>
-            <input id="text-input-${i}" name="text-input" type="text" data-text-input="${i}"
-              placeholder="Enter your text here" value="And you just added line ${i}!" >
-            <button type="button" class="btn destructive" data-remove-line="${i}">X</button>
-          </div>`;
-  parent.insertAdjacentHTML('beforeend', component);
-  textInputs = document.querySelectorAll('[data-text-input]');
-  generateCodeExample();
-});
-
-textInputsContainer.addEventListener('click', (e) => {
-  if (e.target && e.target.matches('button.btn.destructive')) {
-    const lineToRemove = e.target.getAttribute('data-remove-line');
-    const inputToRemove = document.querySelector(
-      `input[data-text-input="${lineToRemove}"]`,
-    );
-    const containerToRemove = inputToRemove.parentElement;
-    containerToRemove.remove();
-    textInputs = document.querySelectorAll('[data-text-input]');
-    generateCodeExample();
-  }
-});
-
-const inputs = [
-  ...textInputs,
-  effectSelect,
-  primaryColorInput,
-  secondaryColorInput,
-  bgColorInput,
-  fontInput,
-  sizeInput,
-  widthInput,
-  heightInput,
-];
-
-const titleAnimation = () => {
-  let index = 0;
-  const interval = setInterval(() => {
-    titleContainer.innerText += title[index];
-    index++;
-    if (index === title.length) {
-      clearInterval(interval);
-    }
-  }, 150);
+const hideLoadingIndicator = () => {
+  spinner.classList.add('hidden');
+  imgOutput.classList.remove('hidden');
 };
 
 const generateUrl = () => {
@@ -120,17 +134,24 @@ const generateCodeExample = () => {
   }
 };
 
+const debounce = (func, delay) => {
+  showLoadingIndicator();
+  let timeoutId;
+  return (...args) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => func(...args), delay);
+  };
+};
+
+const updateOutput = debounce(() => {
+  const url = generateUrl();
+  imgOutput.src = url;
+  generateCodeExample();
+  hideLoadingIndicator();
+}, 500);
+
 inputs.forEach((input) => {
-  input.addEventListener(
-    'input',
-    () =>
-      setTimeout(() => {
-        const img = document.getElementById('svg-output');
-        img.src = generateUrl();
-        generateCodeExample();
-      }),
-    400,
-  );
+  input.addEventListener('change', updateOutput);
 });
 
 outputTypeSelected.addEventListener('change', () => {
@@ -138,8 +159,7 @@ outputTypeSelected.addEventListener('change', () => {
 });
 
 window.addEventListener('load', () => {
+  showLoadingIndicator();
   titleAnimation();
-  const img = document.getElementById('svg-output');
-  img.src = generateUrl();
-  generateCodeExample();
+  updateOutput();
 });

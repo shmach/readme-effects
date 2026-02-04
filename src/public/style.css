@@ -256,6 +256,7 @@ select>option {
 }
 
 .btn:disabled,
+input[disabled],
 .btn[disabled] {
   border-color: var(--muted);
   color: var(--muted);
@@ -316,6 +317,29 @@ select>option {
   border: 5px solid var(--primary-color);
   border-radius: 12px;
   overflow-x: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100px;
+}
+
+.spinner {
+  border: 8px solid var(--muted);
+  border-top: 8px solid var(--primary-color);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 code {
@@ -329,6 +353,8 @@ code {
   display: block;
   white-space: pre-wrap;
   word-break: break-all;
+  width: 100%;
+  min-height: 80px;
 }
 
 @media (max-width: 800px) {
