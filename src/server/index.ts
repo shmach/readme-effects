@@ -26,8 +26,6 @@ Bun.serve({
     ...staticFiles,
     '/generate/wavy-glitch': (req) =>
       routeAdapter(makeGenerateWavyGlitchSvgController())(req),
-    // '/generate/typing': (req) =>
-    // routeAdapter(makeGenerateTypingSvgController())(req),
   },
   fetch() {
     return new Response('Not Found', { status: 404 });

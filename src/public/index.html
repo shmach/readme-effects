@@ -20,8 +20,11 @@
 
   <main>
     <section class="form-section">
-      <div class="section-title-container">
+      <div class="section-header">
         <h2 class="section-title">Properties</h2>
+        <select id="effect-select" name="effect-select">
+          <option value="wavy-glitch">Wavy Glitch</option>
+        </select>
       </div>
       <form>
         <div class="form-component form-component__text" id="text-inputs-container">
@@ -35,11 +38,6 @@
         <div class="form-component form-component__select">
           <div class="form-input-container">
             <label for="effect-select">Select Effect:</label>
-            <select id="effect-select" name="effect-select">
-              <option value="wavy-glitch">Wavy Glitch</option>
-              <option value="typing">Typing</option>
-              <option value="matrix-bug">Matrix Bug</option>
-            </select>
           </div>
         </div>
         <div class="form-component form-component__text-properties">
@@ -61,13 +59,16 @@
           </div>
           <div class="form-input-container">
             <label for="font">Font: </label>
-            <input type="text" id="font" name="font" value="Roboto">
+            <select id="font" name="font">
+              <option value="Roboto">Roboto</option>
+              <option value="Arial">Arial</option>
+            </select>
           </div>
           <div class="form-input-container">
             <label for="size">Font Size (px): </label>
             <input type="number" id="size" name="size" value="28" placeholder="Type the size in pixels...">
           </div>
-          <div class="form-input-container">
+          <div class="form-input-container size-inputs-container">
             <div class="size-inputs">
               <label for="width">Width (px): </label>
               <input type="number" id="width" name="width" value="500" placeholder="(px)">
@@ -81,10 +82,8 @@
       </form>
     </section>
     <section class="output-section">
-      <div class="output-container">
-        <div class="section-title-container">
-          <h2 class="section-title">Output</h2>
-        </div>
+      <div class="section-header">
+        <h2 class="section-title">Output</h2>
         <div>
           <select id="output-type-select" name="output-type-select" defaultValue="markdown">
             <option value="markdown">Markdown</option>

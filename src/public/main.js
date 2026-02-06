@@ -59,17 +59,15 @@ textInputsContainer.addEventListener('click', (e) => {
   }
 });
 
-const inputs = [
-  ...textInputs,
-  effectSelect,
-  primaryColorInput,
-  secondaryColorInput,
-  bgColorInput,
-  fontInput,
-  sizeInput,
-  widthInput,
-  heightInput,
-];
+transparentBgCheckbox.addEventListener('change', () => {
+  if (transparentBgCheckbox.checked) {
+    bgColorInput.disabled = true;
+    updateOutput();
+  } else {
+    bgColorInput.disabled = false;
+    updateOutput();
+  }
+});
 
 // Output Code vars (This is not IA coded >:( ))
 const outputTypeSelected = document.querySelector('#output-type-select');
@@ -146,12 +144,28 @@ const debounce = (func, delay) => {
 const updateOutput = debounce(() => {
   const url = generateUrl();
   imgOutput.src = url;
+  console.log(imgOutput.src);
   generateCodeExample();
   hideLoadingIndicator();
 }, 500);
 
+const inputs = [
+  ...textInputs,
+  effectSelect,
+  primaryColorInput,
+  secondaryColorInput,
+  bgColorInput,
+  fontInput,
+  sizeInput,
+  widthInput,
+  heightInput,
+];
+
 inputs.forEach((input) => {
-  input.addEventListener('change', updateOutput);
+  input.addEventListener('change', (e) => {
+    console.log('Input changed:', e.target);
+    updateOutput();
+  });
 });
 
 outputTypeSelected.addEventListener('change', () => {
