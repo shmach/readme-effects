@@ -1,4 +1,4 @@
-# Readme+Effects: 
+# Readme+Effects:
 
 ## Textos animados para Readme, HTML, entre outros!
 
@@ -7,7 +7,7 @@
 Projeto voltando para quem gosta de dar uma efeitada no seu readme, mas o Readme+Effects não precisa ser usado apenas para isso.
 Como o projeto retorna um SVG animado, você pode usar como bem entender.
 
-Para acessar use o seguinte ![link](https://readme-effects-api-14364259052.us-central1.run.app/)
+Para acessar use o seguinte [link](https://readme-effects-api-14364259052.us-central1.run.app/)
 
 ## Tecnologias e Ferramentas
 
@@ -30,16 +30,14 @@ Para acessar use o seguinte ![link](https://readme-effects-api-14364259052.us-ce
 
 ## Instalação
 - Baixe o repositório
-- Instale o ![Bun](https://bun.com/)
+- Instale o [Bun](https://bun.com/)
 - Instale as dependências:
 ````
   bun install
-
 ````
 - Rode o projeto:
 ````
 bun dev
-
 ````
 
 Se quiser fazer o build do projeto, deve ter problemas com o script "build" no package.json, recomendo editar o script
