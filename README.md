@@ -1,8 +1,8 @@
 # Readme+Effects:
 
-## Textos animados para Readme, HTML, entre outros!
-
 ![Demo](./docs/images/readme-effects-demo.gif)
+
+## Textos animados para Readme, HTML, entre outros!
 
 Projeto voltando para quem gosta de dar uma efeitada no seu readme, mas o Readme+Effects não precisa ser usado apenas para isso.
 Como o projeto retorna um SVG animado, você pode usar como bem entender.
