@@ -150,7 +150,6 @@ const updateOutput = debounce(() => {
 }, 500);
 
 const inputs = [
-  ...textInputs,
   effectSelect,
   primaryColorInput,
   secondaryColorInput,
@@ -160,6 +159,12 @@ const inputs = [
   widthInput,
   heightInput,
 ];
+
+textInputsContainer.addEventListener('input', (e) => {
+  if (e.target && e.target.matches('input[data-text-input]')) {
+    updateOutput();
+  }
+});
 
 inputs.forEach((input) => {
   input.addEventListener('change', (e) => {
