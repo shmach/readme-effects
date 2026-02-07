@@ -1,4 +1,6 @@
-# Readme+Effects: Textos animados para Readme, HTML, entre outros!
+# Readme+Effects: 
+
+## Textos animados para Readme, HTML, entre outros!
 
 ![Demo](./docs/images/readme-effects-demo.gif)
 
@@ -91,5 +93,6 @@ bun dev
 If you want to build the project, you may run into issues with the `build` script in `package.json`; consider updating that script if needed.
 
 Feel free to leave feedback, suggestions, or report bugs!
+
 
 
