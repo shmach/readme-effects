@@ -1,4 +1,6 @@
 import { routeAdapter } from '@main/adapters/routeAdapter';
+import { makeGenerateScanlineSvgController } from '@main/factories/web/makeGenerateScanlineSvgController';
+import { makeGenerateTypewriterSvgController } from '@main/factories/web/makeGenerateTypewriterSvgController';
 import { makeGenerateWavyGlitchSvgController } from '@main/factories/web/makeGenerateWavyGlitchSvgController';
 
 /**
@@ -26,6 +28,10 @@ Bun.serve({
     ...staticFiles,
     '/generate/wavy-glitch': (req) =>
       routeAdapter(makeGenerateWavyGlitchSvgController())(req),
+    '/generate/typewriter': (req) =>
+      routeAdapter(makeGenerateTypewriterSvgController())(req),
+    '/generate/scanline': (req) =>
+      routeAdapter(makeGenerateScanlineSvgController())(req),
   },
   fetch() {
     return new Response('Not Found', { status: 404 });

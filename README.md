@@ -7,7 +7,7 @@
 Projeto voltando para quem gosta de dar uma efeitada no seu readme, mas o Readme+Effects não precisa ser usado apenas para isso.
 Como o projeto retorna um SVG animado, você pode usar como bem entender.
 
-Para acessar use o seguinte [link](https://readme-effects-api-14364259052.us-central1.run.app/)
+Para acessar use o seguinte [link](https://readme-effects-api-14364259052.us-central1.run.app/).
 
 ## Tecnologias e Ferramentas
 
@@ -49,13 +49,15 @@ Se quiser fazer o build do projeto, deve ter problemas com o script "build" no p
 
 # English version
 
-# Readme+Effects: Animated text for README files, HTML, and more!
+# Readme+Effects
 
 ![Demo](./docs/images/readme-effects-demo.gif)
 
+## Animated text for README files, HTML, and more!
+
 This project returns an animated SVG that you can use in README files, web pages, or anywhere else.
 
-To try the API use the following ![link](https://readme-effects-api-14364259052.us-central1.run.app/):
+To try the API use the following [link](https://readme-effects-api-14364259052.us-central1.run.app/).
 
 ## Technologies and Tools
 
@@ -78,7 +80,7 @@ To try the API use the following ![link](https://readme-effects-api-14364259052.
 
 ## Installation
 - Clone the repository
-- Install ![Bun](https://bun.com/)
+- Install [Bun](https://bun.com/)
 - Install dependencies:
 ```
 bun install
@@ -88,9 +90,9 @@ bun install
 bun dev
 ```
 
-If you want to build the project, you may run into issues with the `build` script in `package.json`; consider updating that script if needed.
+If you want to build the project, you may run into issues with the "build" script in "package.json"; consider updating that script if needed.
 
-Feel free to leave feedback, suggestions, or report bugs!
+### Feel free to leave feedback, suggestions, or report bugs!
 
 
 
