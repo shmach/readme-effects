@@ -18,8 +18,9 @@ export class GenerateTypewriterSvgUseCase implements IUseCase<
     const rawText = url.searchParams.get('text') ?? 'Hello World!';
     const lines = rawText.split(';').map((line) => [...line].map(escapeXML));
 
-    const charDelay = 0.07;
-    const pauseAfter = 1.0;
+    const charDelay = 0.1;
+    const pauseAfter = 1.5;
+    const lineGap = 0.4;
     const blinkHalf = 0.4;
 
     // Calculate the start/end time for each line within one full cycle
@@ -29,6 +30,7 @@ export class GenerateTypewriterSvgUseCase implements IUseCase<
       const start = cumTime;
       cumTime += chars.length * charDelay + pauseAfter;
       lineTimings.push({ start, end: cumTime });
+      cumTime += lineGap;
     }
     const totalDuration = cumTime;
     const dur = `${totalDuration.toFixed(2)}s`;
